@@ -1,0 +1,28 @@
+@import "../../styles/_mixins";
+.input-wrapper {
+    @include flex(flex-start,center);
+    width: calc(min(18rem, 100%));
+    height: 2.5rem;
+    .input {
+        @include widthAndHeight(100%,100%);
+        padding:0.35em 1.2em;
+        border: 1px solid rgba(119, 118, 118, 0);
+        border-radius:5px;
+        text-decoration:none;
+        font-weight:500;
+        color:#FFFFFF;
+        transition: all 0.2s;
+        background: rgb(68, 68, 68);
+        backdrop-filter: blur(20px);
+        box-shadow: 0px 2px 12px rgba(0,0,0,0.25);
+    }
+    .input:hover{
+        border: 1px solid white;
+    }
+    .input:focus{
+        -webkit-tap-highlight-color: rgba(255, 255, 255, 0) ; 
+        -webkit-focus-ring-color: rgba(255, 255, 255, 0) ; 
+        outline: none ;
+        border: 1px solid white;
+    }   
+}

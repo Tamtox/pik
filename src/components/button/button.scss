@@ -1,0 +1,22 @@
+@import "../../styles/_mixins";
+
+.button {
+    width: calc(min(18rem, 100%));
+    @include flex;
+    height: 2.5rem;
+    display:inline-block;
+    padding:0.35em 1.2em;
+    border:none;
+    border-radius:5px;
+    text-decoration:none;
+    font-weight:500;
+    color:#FFFFFF;
+    text-align:center;
+    transition: all 0.2s;
+    background-color: rgb(255, 94, 0);;
+    cursor: pointer;
+}
+.button:hover{
+    color:#000000;
+    background-color:#FFFFFF;
+}

@@ -7,13 +7,17 @@ import {MdOutlineApartment} from 'react-icons/md';
 import {BiRuble} from 'react-icons/bi';
 import Button from "../components/button/button";
 import Input from "../components/input/input";
+import Select from "../components/select/select";
 
 interface ITitleState {
     amount: string;
 }
 
 const Title:React.FC = ():JSX.Element => {
-    const [state, setState] = useReducer((state:ITitleState,action:Partial<ITitleState>) => ({...state,...action}), {amount:""});
+    // Title state
+    const [state, setState] = useReducer((state:ITitleState,action:Partial<ITitleState>) => ({...state,...action}), {
+        amount:"",
+    });
     const amountInputHandler = (newAmount:string) => {
         setState({amount:newAmount});
     }
@@ -28,6 +32,7 @@ const Title:React.FC = ():JSX.Element => {
             <div className="title-region-select ">
 
             </div>
+            <Select />
             <Input value={state.amount} onChange={amountInputHandler} classNameWrapper="title-amount" placeholder="Ежемесячный платёж">
                 <BiRuble className="title-amount-icon"/>
             </Input>

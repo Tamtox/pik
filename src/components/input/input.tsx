@@ -7,7 +7,7 @@ type InputProps =  {
     value?: string,
     defaultValue?: string,
     placeholder?: string,
-    children: any,
+    children?: any,
     className?: string,
     classNameWrapper?: string,
     disabled?: boolean,
@@ -17,7 +17,7 @@ type InputProps =  {
 
 const Input = ({value,defaultValue,placeholder,type,className,classNameWrapper,children,disabled,onChange}:InputProps):JSX.Element => {
     return (
-        <div className={`input-wrapper ${classNameWrapper}`}>
+        <div className={`input-container ${classNameWrapper}`}>
             <input 
                 placeholder={placeholder && placeholder} 
                 value={value && value} 

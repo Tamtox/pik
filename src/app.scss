@@ -5,7 +5,7 @@
   min-height: 100vh;
   background: #121212;
   .wrapper {
-    width: calc(min(70rem, 100%));
+    width: calc(min(50rem, 100%));
     min-height: 100vh;
     @include flex;
     padding: 0 1rem 0 1rem;

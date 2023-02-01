@@ -18,7 +18,6 @@
             @include flex;
             flex-direction: column;
             color: white;
-            background: red;
             .flat-list-header-options-price{
 
             }
@@ -31,6 +30,18 @@
             border-radius: 20px;
             background: rgba(255, 94, 0, 0.3);
             color: rgb(255, 119, 0);;
+        }
+    }
+    .flat-list{
+        @include widthAndHeight(100%,100%);
+        padding: 1rem;
+        gap: 1rem;
+        .flat-list-card{
+            width: 18rem;
+            border: 1px white solid;
+            height: 30rem;
+            border-radius: 7px;
+            padding: 1rem;
         }
     }
 }

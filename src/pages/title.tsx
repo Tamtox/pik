@@ -1,5 +1,7 @@
 // Dependencies
 import React,{useReducer} from "react";
+import { useSelector,useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 // Styles
 import "../styles/title.scss";
 // Components
@@ -8,6 +10,8 @@ import {BiRuble} from 'react-icons/bi';
 import Button from "../components/button/button";
 import Input from "../components/input/input";
 import Select from "../components/select/select";
+import { RootState } from "../store/store";
+import { flatActions } from "../store/store";
 
 const cities = [
     {title: "Москва и область", id:"1"},
@@ -27,39 +31,51 @@ const cities = [
 
 interface ITitleState {
     amount: string;
-    region: string;
-    regionId:string,
+    city: string;
+    cityId:string,
 }
 
 const Title:React.FC = ():JSX.Element => {
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+    const city = useSelector<RootState,string>(state=>state.flatSlice.city);
+    const cityId = useSelector<RootState,string>(state=>state.flatSlice.cityId);
+    const price = useSelector<RootState,string>(state=>state.flatSlice.price);
     // Title state
     const [state, setState] = useReducer((state:ITitleState,action:Partial<ITitleState>) => ({...state,...action}), {
-        amount:"",
-        region:cities[0].title,
-        regionId:cities[0].id,
+        amount: price || "",
+        city:cities[0].title,
+        cityId:cities[0].id,
     });
     const amountInputHandler = (newAmount:string) => {
         setState({amount:newAmount});
     }
-    const regionSelectHandler = (newRegion:string,newRegionId:string) => {
-        setState({region:newRegion,regionId:newRegionId});
+    const regionSelectHandler = (newCity:string,newCityId:string) => {
+        setState({city:newCity,cityId:newCityId});
+    }
+    const formSubmitHandler = (event:any) => {
+        event.preventDefault();
+        dispatch(flatActions.setPrice(state.amount));
+        dispatch(flatActions.setCity(state.city));
+        dispatch(flatActions.setCityId(state.cityId));
+        navigate("/flat-list");
     }
     return (
-        <div className="title">
+        <form className="title" onSubmit={formSubmitHandler}>
             <div className="title-icon-wrapper">
                 <MdOutlineApartment className="title-icon"/>
             </div>
             <div className="title-text-wrapper">
                 <h2>Сколько вы платите за аренду квартиры?</h2>
             </div>
-            <Select classNameWrapper="title-region-select" value={state.region} onChange={regionSelectHandler} options={cities}/>
+            <Select classNameWrapper="title-region-select" value={state.city} onChange={regionSelectHandler} options={cities}/>
             <Input value={state.amount} onChange={amountInputHandler} classNameWrapper="title-amount" placeholder="Ежемесячный платёж">
                 <BiRuble className="title-amount-icon"/>
             </Input>
             <Button className="title-button">
                 Продолжить
             </Button>
-        </div>
+        </form>
     )
 }
 

@@ -4,7 +4,7 @@
 import "./button.scss";
 
 type ButtonProps =  {
-    children: any,
+    children?: any,
     className?: string,
     disabled?: boolean,
     onClick?: Function,

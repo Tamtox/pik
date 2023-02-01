@@ -34,14 +34,39 @@
     }
     .flat-list{
         @include widthAndHeight(100%,100%);
-        padding: 1rem;
+        padding: 0.5rem 0 2rem 0;
         gap: 1rem;
         .flat-list-card{
             width: 18rem;
-            border: 1px white solid;
             height: 30rem;
+            @include grid(20% 60% 20%, 100%);
+            border: 1px white solid;
             border-radius: 7px;
             padding: 1rem;
+            color: white;
+            .flat-list-card-info{
+                .flat-list-card-info-apartment{
+                    @include flex(flex-start,center);
+                    gap: 0.5rem;
+                    .apartment-name{}
+                    .apartment-district{}
+                }
+                .flat-list-card-info-size{
+
+                }
+                .flat-list-card-info-mort{
+
+                }
+                .flat-list-card-info-cost{
+
+                }
+            }
+            .flat-list-card-image{
+
+            }
+            .flat-list-card-controls{
+                @include flex;
+            }
         }
     }
 }

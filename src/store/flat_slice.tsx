@@ -22,6 +22,9 @@ const flatSlice = createSlice({
         setCityId: (state, action) => {
             state.cityId = action.payload;
         },
+        setPrice: (state, action) => {
+            state.price = action.payload;
+        },
     }
 }) 
 

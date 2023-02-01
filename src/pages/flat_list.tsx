@@ -2,6 +2,7 @@
 import React,{useReducer} from "react";
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { FreeMode, Pagination } from "swiper";
+import { useSelector,useDispatch } from "react-redux";
 // Styles
 import "../styles/flat_list.scss";
 import "swiper/css";
@@ -9,8 +10,8 @@ import "swiper/css/free-mode";
 import "swiper/css/pagination";
 // Components
 import Button from "../components/button/button";
-import Input from "../components/input/input";
-import Select from "../components/select/select";
+import { RootState } from "../store/store";
+import { flatActions } from "../store/store";
 
 const flats = [
     {
@@ -46,15 +47,17 @@ const flats = [
 ]
 
 const FlatList:React.FC = ():JSX.Element => {
+    const city = useSelector<RootState,string>(state=>state.flatSlice.city);
+    const price = useSelector<RootState,string>(state=>state.flatSlice.price);
     return (
         <div className="flat-list-container">
             <div className="flat-list-header">
                 <div className="flat-list-header-options">
                     <div className="flat-list-header-options-price">
-                        123
+                        {price}
                     </div>
                     <div className="flat-list-header-options-region">
-                        123
+                        {city}
                     </div>
                 </div>
                 <Button className="flat-list-header-return">
@@ -92,7 +95,7 @@ const FlatList:React.FC = ():JSX.Element => {
 
                             </div>
                             <div className="flat-list-card-controls">
-
+                                <Button>К квартире</Button>
                             </div>
                         </SwiperSlide>
                     )

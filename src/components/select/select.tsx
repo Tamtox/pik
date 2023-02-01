@@ -1,5 +1,5 @@
 // Dependencies
-import React,{useReducer} from "react";
+import React,{useReducer,useRef,useEffect} from "react";
 import {MdOutlineKeyboardArrowDown} from "react-icons/md"
 // Styles
 import "./select.scss";
@@ -21,20 +21,32 @@ interface ISelectState {
 }
 
 const Select = ({value,defaultValue,placeholder,className,options,classNameWrapper,disabled,onChange}:InputProps):JSX.Element => {
+    const selectRef = useRef<HTMLDivElement>(null);
     // Select state
-    const [state,useState] = useReducer((state:ISelectState, action:Partial<ISelectState>)=>({...state,...action}),{
+    const [state,setState] = useReducer((state:ISelectState, action:Partial<ISelectState>)=>({...state,...action}),{
         open:false,
         selectedItem: defaultValue || "123",
     })
     // Open/close handler
     const toggleSelectOpen = () => {
         if(options) {
-            useState({open:!state.open})
+            setState({open:!state.open})
         }
     }
-    // 
+    // Close if click is outside
+    const selectOutsideClickHandler = (event:any) => {
+        if(!selectRef.current?.contains(event?.target)) {
+            setState({open:false});
+        }
+    }
+    useEffect(()=>{
+        document.addEventListener('click',selectOutsideClickHandler,true);
+        return () => {
+            document.removeEventListener('click',selectOutsideClickHandler,true);
+        }
+    },[state.open])
     return (
-        <div className={`select-container ${classNameWrapper}`} onClick={toggleSelectOpen}>
+        <div className={`select-container ${classNameWrapper}`} onClick={toggleSelectOpen} ref={selectRef}>
             <div className="select-header">
                 {value || ""}
             </div>

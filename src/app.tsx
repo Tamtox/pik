@@ -5,6 +5,7 @@ import { Routes,Route } from 'react-router-dom';
 import './app.scss'
 // Components
 const Title = React.lazy(()=> import('./pages/title'));
+const FlatList = React.lazy(()=> import('./pages/flat_list'));
 const Loading = React.lazy(()=> import('./pages/loading'));
 
 
@@ -15,7 +16,7 @@ function App() {
         <Suspense fallback={<Loading height='100vh'/>}>
             <Routes>
               <Route path='/' element={<Title/>} />
-              {/* <Route path='/auth' element={isLoggedIn ? (verificationStatus === "Complete" ? <Home/> : <Profile/>) : <Auth/>} /> */}
+              <Route path='/flat-list' element={<FlatList/>} />
               <Route path='*' element={<Title/>} />
             </Routes>
         </Suspense>

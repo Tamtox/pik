@@ -10,8 +10,10 @@
     backdrop-filter: blur(20px);
     box-shadow: 0px 2px 12px rgba(0,0,0,0.25);
     cursor: pointer;
-    .select {
+    z-index: 100;
+    .select-header {
         @include widthAndHeight(100%,100%);
+        @include flex(flex-start,center);
         border: none;
         border-radius:5px;
         padding:0.35em 1.2em;
@@ -19,6 +21,23 @@
         text-decoration:none;
         font-weight:500;
         background: inherit;
+    }
+    .select-list {
+        position: fixed;
+        display: grid;
+        grid-auto-rows: calc(min(100%,2rem));
+        width: calc(min(18rem, 100%));
+        height: 10rem;
+        border-radius: 5px;
+        background-color: white;
+        overflow-y: scroll;
+        top: 3rem;
+        gap: 0.3rem;
+        padding: 0.5rem 1rem 0.5rem 1rem;
+        z-index: 50 !important;
+        .select-list-item {
+            @include flex(flex-start,center);
+        }
     }
     .select-icon {
         font-size: 2.5rem;

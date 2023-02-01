@@ -8,10 +8,10 @@ type InputProps =  {
     value?: string,
     defaultValue?: string,
     placeholder?: string,
-    children?: [],
     className?: string,
     classNameWrapper?: string,
     disabled?: boolean,
+    options:any[],
     onChange?: Function,
 }
 
@@ -20,38 +20,34 @@ interface ISelectState {
     selectedItem:string
 }
 
-const Select = ({value,defaultValue,placeholder,className,classNameWrapper,children,disabled,onChange}:InputProps):JSX.Element => {
+const Select = ({value,defaultValue,placeholder,className,options,classNameWrapper,disabled,onChange}:InputProps):JSX.Element => {
     // Select state
     const [state,useState] = useReducer((state:ISelectState, action:Partial<ISelectState>)=>({...state,...action}),{
         open:false,
-        selectedItem:defaultValue || "",
+        selectedItem: defaultValue || "123",
     })
+    // Open/close handler
+    const toggleSelectOpen = () => {
+        if(options) {
+            useState({open:!state.open})
+        }
+    }
+    // 
     return (
-        <div className={`select-container ${classNameWrapper}`} onClick={()=>{useState({open:!state.open})}}>
-            <ul className="select">
-                { children ? children?.map((item:any)=> {
+        <div className={`select-container ${classNameWrapper}`} onClick={toggleSelectOpen}>
+            <div className="select-header">
+                {value || ""}
+            </div>
+            {state.open ? <div className="select-list">
+                {options.map((option:any)=>{
                     return (
-                        <li className="select-option" key={item.id}>
-                            {item.title}
-                        </li>
+                        <div key={option.id} className="select-list-item" onClick={()=>{onChange ? onChange(option.title,option.id) : null}}>
+                            {option.title}
+                        </div>
                     )
-                }) : null}
-            </ul>
+                })}
+            </div> : null}
             <MdOutlineKeyboardArrowDown className={`select-icon${state.open ? "-open" : ""}`}/>
-            {/* <select 
-                placeholder={placeholder && placeholder} 
-                value={value && value} 
-                defaultValue={defaultValue && defaultValue}
-                onChange={(e:any)=> {onChange ? onChange(e.target.value) : null} } 
-                className={`select ${className}`}
-            >
-                <option value="">Select something…</option>
-                <option>Lorem</option>
-                <option>Ipsum</option>
-                <option>Dolor</option>
-                <option>Sit</option>
-                <option>Amet</option>
-            </select> */}
         </div>
     )
 }

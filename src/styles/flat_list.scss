@@ -11,9 +11,10 @@
         @include flex(space-between,center);
         position: fixed;
         top: 0rem;
-        z-index: 1;
+        z-index: 50;
         border-bottom: 1px solid gray;
         padding: 0.1rem 1rem 0.1rem 1rem;
+        background: #121212d6;
         .flat-list-header-options{
             @include flex(flex-start,center);
             flex-direction: column;
@@ -110,9 +111,13 @@
     }
     .detailed-flat {
         @include widthAndHeight(100%,100%);
+        @include flex;
+        flex-direction: column;
         padding: 0.5rem 0 2rem 0;
         gap: 1rem;
         margin-top: 3rem;
+        margin-bottom: 7rem;
+        color: white;
         .detailed-flat-images{
             width: 100%;
             height: 30rem;
@@ -132,19 +137,70 @@
             }
         }
         .detailed-flat-info{
-
+            width: calc(min(30rem, 100%));
+            display: grid;
+            grid-auto-rows: 100%;
+            gap: 0.5rem;
+            .detailed-flat-info-size-container{
+                @include flex(space-between,center);
+                .detailed-flat-info-size{
+                    @include flex(center,center);
+                    font-size: 1.5rem;
+                }
+                .detailed-flat-info-size-favourite{
+                    width: calc(min(3rem, 100%));
+                    font-size: 2rem;
+                    cursor: pointer;
+                }
+            }
+            .detailed-flat-info-location{
+                font-size: 0.8rem;
+            }
+            .detailed-flat-info-price{
+                font-size: 0.8rem;
+                color: grey;
+            }
         }
         .detailed-flat-info-program{
-
+            width: calc(min(30rem, 100%));
+            display: grid;
+            grid-auto-rows: 100%;
+            .detailed-flat-info-program-type{
+                border-bottom: 1px solid grey;
+            }
+            .detailed-flat-info-program-rate{
+                border-bottom: 1px solid grey;
+            }
+            .detailed-flat-info-program-item{
+                @include flex(flex-start,center);
+                .detailed-flat-info-program-icon{
+                    font-size: 1.5rem;
+                }
+            }
+        }
+        .detailed-flat-info-link-container{
+            width: calc(min(30rem, 100%));
+            text-align: center;
+            color: white;
+            font-size: 0.7rem;
+            .detailed-flat-info-link{
+                display: inline;
+                margin-left: 0.5rem;
+                color: rgb(255, 119, 0);
+            }
         }
         .detailed-flat-controls{
             width: calc(min(50rem, 100%));
             @include flex;
             flex-direction: column;
             position: fixed;
-            bottom: 1rem;
+            bottom: 0rem;
+            padding: 2rem 0 1rem 0;
             z-index: 1;
             gap: 0.5rem;
+            background: #121212;
+            background: linear-gradient(180deg, #1212126d 0%, #121212 70%, #121212 100%);
+            box-shadow: 0px -4px 10px #1212126d;      
         }
     }
 }

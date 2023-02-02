@@ -5,6 +5,8 @@ import { FreeMode, Pagination } from "swiper";
 import { useSelector,useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import {IoHeartOutline} from 'react-icons/io5';
+import {AiOutlinePercentage} from 'react-icons/ai';
+import {BsCalendar3} from 'react-icons/bs';
 // Styles
 import "../styles/flat_list.scss";
 import "swiper/css";
@@ -52,8 +54,8 @@ const FlatList:React.FC = ():JSX.Element => {
     const navigate = useNavigate();
     const city = useSelector<RootState,string>(state=>state.flatSlice.city);
     const price = useSelector<RootState,string>(state=>state.flatSlice.price);
-    const [detailedFlat, setDetailedFlat] = useState<any>(flats[0]);
-    const detailedFlatComponent = (
+    const [detailedFlat, setDetailedFlat] = useState<any>(null);
+    const detailedFlatComponent = detailedFlat ? (
         <div className="detailed-flat">
             <Swiper 
             className="detailed-flat-images"
@@ -73,17 +75,40 @@ const FlatList:React.FC = ():JSX.Element => {
                 </SwiperSlide>
             </Swiper>
             <div className="detailed-flat-info">
-                123
+                <div className="detailed-flat-info-size-container">
+                    <div className="detailed-flat-info-size">
+                        {`${detailedFlat.apartmentType} ${detailedFlat.apartmentSize}`}
+                    </div>
+                    <IoHeartOutline className="detailed-flat-info-size-favourite"/>
+                </div>
+                <div className="detailed-flat-info-location">
+                    {`${detailedFlat.district}`}
+                </div>
+                <div className="detailed-flat-info-price">
+                {`От ${detailedFlat.price} ₽`}
+                </div>
             </div>
             <div className="detailed-flat-info-program">
-
+                <div className="detailed-flat-info-program-item detailed-flat-info-program-type">
+                    <AiOutlinePercentage className="detailed-flat-info-program-icon"/>
+                </div>
+                <div className="detailed-flat-info-program-item detailed-flat-info-program-rate">
+                    <AiOutlinePercentage className="detailed-flat-info-program-icon"/>
+                </div>
+                <div className="detailed-flat-info-program-item detailed-flat-info-program-downment">
+                    <BsCalendar3 className="detailed-flat-info-program-icon"/>
+                </div>
+            </div>
+            <div className="detailed-flat-info-link-container">
+                Для получения актуальной информации по предложениям зайдите на
+                <a className="detailed-flat-info-link" target="_blank" href={`https://www.pik.ru/`}>pik.ru</a>
             </div>
             <div className="detailed-flat-controls">
                 <Button>Хочу тут жить</Button>
                 <Button>Следующая квартира</Button>
             </div>        
         </div>
-    )
+    ) : null;
     return (
         <div className="flat-list-container">
             <div className="flat-list-header">
@@ -110,7 +135,7 @@ const FlatList:React.FC = ():JSX.Element => {
             >
                 {flats.map((flat) => {
                     return (
-                        <SwiperSlide className="flat-list-card">
+                        <SwiperSlide className="flat-list-card" key={flat.id}>
                             <div className="flat-list-card-info">
                                 <div className="flat-list-card-info-apartment">
                                     <div className="apartment-name">{flat.name}</div>

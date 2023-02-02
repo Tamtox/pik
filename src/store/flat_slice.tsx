@@ -9,7 +9,7 @@ interface IFlatSliceSchema {
 const initialState: IFlatSliceSchema = {
     city: '',
     cityId: '',
-    price: "0",
+    price: "",
 }
 
 const flatSlice = createSlice({

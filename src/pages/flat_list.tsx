@@ -3,6 +3,7 @@ import React,{useReducer} from "react";
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { FreeMode, Pagination } from "swiper";
 import { useSelector,useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 // Styles
 import "../styles/flat_list.scss";
 import "swiper/css";
@@ -47,6 +48,7 @@ const flats = [
 ]
 
 const FlatList:React.FC = ():JSX.Element => {
+    const navigate = useNavigate();
     const city = useSelector<RootState,string>(state=>state.flatSlice.city);
     const price = useSelector<RootState,string>(state=>state.flatSlice.price);
     return (
@@ -54,13 +56,14 @@ const FlatList:React.FC = ():JSX.Element => {
             <div className="flat-list-header">
                 <div className="flat-list-header-options">
                     <div className="flat-list-header-options-price">
-                        {price}
+                        <p className="price-number">{`${price} ₽`}</p>
+                        <p className="price-text">{"/в месяц"}</p>
                     </div>
                     <div className="flat-list-header-options-region">
                         {city}
                     </div>
                 </div>
-                <Button className="flat-list-header-return">
+                <Button onClick={()=>{navigate("/")}} className="flat-list-header-return">
                     Изменить
                 </Button>
             </div>
@@ -81,8 +84,7 @@ const FlatList:React.FC = ():JSX.Element => {
                                     <div className="apartment-district">{flat.district}</div>
                                 </div>
                                 <div className="flat-list-card-info-size">
-                                    <div className="apartment-type"></div>
-                                    <div className="apartment-size"></div>
+                                    {`${flat.apartmentType} ${flat.apartmentSize}`}
                                 </div>
                                 <div className="flat-list-card-info-mort">
                                     {`В ипотеку от ${flat.pricePerMonth} ₽ в месяц`}
@@ -92,7 +94,7 @@ const FlatList:React.FC = ():JSX.Element => {
                                 </div>
                             </div>
                             <div className="flat-list-card-image">
-
+                                img
                             </div>
                             <div className="flat-list-card-controls">
                                 <Button>К квартире</Button>

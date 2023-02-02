@@ -11,11 +11,12 @@ type InputProps =  {
     className?: string,
     classNameWrapper?: string,
     disabled?: boolean,
+    required?:boolean
     type?: string,
     onChange?: Function,
 }
 
-const Input = ({value,defaultValue,placeholder,type,className,classNameWrapper,children,disabled,onChange}:InputProps):JSX.Element => {
+const Input = ({value,defaultValue,placeholder,type,className,classNameWrapper,children,disabled,required,onChange}:InputProps):JSX.Element => {
     return (
         <div className={`input-container ${classNameWrapper}`}>
             <input 
@@ -23,6 +24,7 @@ const Input = ({value,defaultValue,placeholder,type,className,classNameWrapper,c
                 value={value && value} 
                 defaultValue={defaultValue && defaultValue}
                 type={type ? type : 'text'}
+                required={required || false} 
                 onChange={(e:any)=> {onChange ? onChange(e.target.value) : null} } 
                 className={`input ${className}`}
             >

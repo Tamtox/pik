@@ -16,7 +16,7 @@ function App() {
         <Suspense fallback={<Loading height='100vh'/>}>
             <Routes>
               <Route path='/' element={<Title/>} />
-              <Route path='/flat-list' element={<FlatList/>} />
+              <Route path='/flats' element={<FlatList/>} />
               <Route path='*' element={<Title/>} />
             </Routes>
         </Suspense>

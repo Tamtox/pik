@@ -58,7 +58,7 @@ const Title:React.FC = ():JSX.Element => {
         dispatch(flatActions.setPrice(state.amount));
         dispatch(flatActions.setCity(state.city));
         dispatch(flatActions.setCityId(state.cityId));
-        navigate("/flat-list");
+        navigate("/flats");
     }
     return (
         <form className="title" onSubmit={formSubmitHandler}>
@@ -69,7 +69,7 @@ const Title:React.FC = ():JSX.Element => {
                 <h2>Сколько вы платите за аренду квартиры?</h2>
             </div>
             <Select classNameWrapper="title-region-select" value={state.city} onChange={regionSelectHandler} options={cities}/>
-            <Input value={state.amount} onChange={amountInputHandler} classNameWrapper="title-amount" placeholder="Ежемесячный платёж">
+            <Input value={state.amount} onChange={amountInputHandler} classNameWrapper="title-amount" placeholder="Ежемесячный платёж" required={true}>
                 <BiRuble className="title-amount-icon"/>
             </Input>
             <Button className="title-button">

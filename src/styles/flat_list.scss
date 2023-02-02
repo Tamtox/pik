@@ -10,7 +10,7 @@
         height: 3rem;
         @include flex(space-between,center);
         position: fixed;
-        top: 1rem;
+        top: 0rem;
         z-index: 1;
         border-bottom: 1px solid gray;
         padding: 0.1rem 1rem 0.1rem 1rem;
@@ -88,12 +88,63 @@
                     opacity: 0.8;
                 }
             }
-            .flat-list-card-image{
-
+            .flat-list-card-image-container{
+                @include flex;
+                .flat-list-card-image{
+                    object-fit: contain;
+                    width: 100%;
+                    height: 100%;
+                }
             }
             .flat-list-card-controls{
                 @include flex;
+                gap: 0.5rem;
+                .flat-list-card-controls-flat-link{}
+                .flat-list-card-controls-favourite{
+                    width: calc(min(3rem, 100%));
+                    font-size: 2rem;
+                    cursor: pointer;
+                }
             }
+        }
+    }
+    .detailed-flat {
+        @include widthAndHeight(100%,100%);
+        padding: 0.5rem 0 2rem 0;
+        gap: 1rem;
+        margin-top: 3rem;
+        .detailed-flat-images{
+            width: 100%;
+            height: 30rem;
+            padding: 1rem;
+            .detailed-flat-image-container{
+                @include flex;
+                width: 18rem;
+                height: 100%;
+                border: 1px rgb(76, 76, 76) solid;
+                border-radius: 7px;
+                background: rgb(30, 30, 30);
+                .detailed-flat-image{
+                    object-fit: contain;
+                    width: 100%;
+                    height: 100%;
+                }
+            }
+        }
+        .detailed-flat-info{
+
+        }
+        .detailed-flat-info-program{
+
+        }
+        .detailed-flat-controls{
+            width: calc(min(50rem, 100%));
+            @include flex;
+            flex-direction: column;
+            position: fixed;
+            bottom: 1rem;
+            z-index: 1;
+            gap: 0.5rem;
         }
     }
 }

@@ -1,9 +1,10 @@
 // Dependencies
-import React,{useReducer} from "react";
+import React,{useReducer,useState} from "react";
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { FreeMode, Pagination } from "swiper";
 import { useSelector,useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import {IoHeartOutline} from 'react-icons/io5';
 // Styles
 import "../styles/flat_list.scss";
 import "swiper/css";
@@ -51,6 +52,38 @@ const FlatList:React.FC = ():JSX.Element => {
     const navigate = useNavigate();
     const city = useSelector<RootState,string>(state=>state.flatSlice.city);
     const price = useSelector<RootState,string>(state=>state.flatSlice.price);
+    const [detailedFlat, setDetailedFlat] = useState<any>(flats[0]);
+    const detailedFlatComponent = (
+        <div className="detailed-flat">
+            <Swiper 
+            className="detailed-flat-images"
+            slidesPerView={'auto'}
+            spaceBetween={30}
+            freeMode={true}
+            modules={[FreeMode, Pagination]}
+            >
+                <SwiperSlide className="detailed-flat-image-container">
+                    <img className="detailed-flat-image" src="https://balancedarchitecture.com/wp-content/uploads/2021/11/EXISTING-FIRST-FLOOR-PRES-scaled-e1635965923983.jpg" alt="" />
+                </SwiperSlide>
+                <SwiperSlide className="detailed-flat-image-container">
+                    <img className="detailed-flat-image" src="https://balancedarchitecture.com/wp-content/uploads/2021/11/EXISTING-FIRST-FLOOR-PRES-scaled-e1635965923983.jpg" alt="" />
+                </SwiperSlide>
+                <SwiperSlide className="detailed-flat-image-container">
+                    <img className="detailed-flat-image" src="https://balancedarchitecture.com/wp-content/uploads/2021/11/EXISTING-FIRST-FLOOR-PRES-scaled-e1635965923983.jpg" alt="" />
+                </SwiperSlide>
+            </Swiper>
+            <div className="detailed-flat-info">
+                123
+            </div>
+            <div className="detailed-flat-info-program">
+
+            </div>
+            <div className="detailed-flat-controls">
+                <Button>Хочу тут жить</Button>
+                <Button>Следующая квартира</Button>
+            </div>        
+        </div>
+    )
     return (
         <div className="flat-list-container">
             <div className="flat-list-header">
@@ -67,7 +100,7 @@ const FlatList:React.FC = ():JSX.Element => {
                     Изменить
                 </Button>
             </div>
-            <Swiper 
+            {detailedFlat ? detailedFlatComponent : <Swiper 
             className="flat-list"
             slidesPerView={'auto'}
             spaceBetween={30}
@@ -93,16 +126,17 @@ const FlatList:React.FC = ():JSX.Element => {
                                     {`Стоимость квартиры от ${flat.pricePerMonth} ₽`}
                                 </div>
                             </div>
-                            <div className="flat-list-card-image">
-                                img
+                            <div className="flat-list-card-image-container">
+                                <img className="flat-list-card-image" src="https://balancedarchitecture.com/wp-content/uploads/2021/11/EXISTING-FIRST-FLOOR-PRES-scaled-e1635965923983.jpg" alt="" />
                             </div>
                             <div className="flat-list-card-controls">
-                                <Button>К квартире</Button>
+                                <Button onClick={()=>{setDetailedFlat(flat)}} className="flat-list-card-controls-flat-link">К квартире</Button>
+                                <IoHeartOutline className="flat-list-card-controls-favourite"/>
                             </div>
                         </SwiperSlide>
                     )
                 })}
-            </Swiper>
+            </Swiper>}
         </div>
     )
 }

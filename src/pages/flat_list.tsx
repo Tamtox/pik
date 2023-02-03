@@ -7,6 +7,7 @@ import { useNavigate } from "react-router-dom";
 import {IoHeartOutline} from 'react-icons/io5';
 import {AiOutlinePercentage} from 'react-icons/ai';
 import {BsCalendar3} from 'react-icons/bs';
+import {MdArrowForwardIos} from 'react-icons/md';
 // Styles
 import "../styles/flat_list.scss";
 import "swiper/css";
@@ -90,13 +91,42 @@ const FlatList:React.FC = ():JSX.Element => {
             </div>
             <div className="detailed-flat-info-program">
                 <div className="detailed-flat-info-program-item detailed-flat-info-program-type">
-                    <AiOutlinePercentage className="detailed-flat-info-program-icon"/>
+                    <div className="detailed-flat-info-program-icon-container">
+                        <AiOutlinePercentage className="detailed-flat-info-program-icon"/>
+                    </div>
+                    <div className="detailed-flat-info-program-description">
+                        Программа
+                    </div>
+                    <div className="detailed-flat-info-program-value">
+                        <div className="detailed-flat-info-program-value-name">
+                            {`${"Кэшбек 15%"}`}
+                        </div>
+                        <div className="detailed-flat-info-program-value-select">
+                            <MdArrowForwardIos className="detailed-flat-info-program-value-select-icon"/>
+                        </div>
+                    </div>
                 </div>
                 <div className="detailed-flat-info-program-item detailed-flat-info-program-rate">
-                    <AiOutlinePercentage className="detailed-flat-info-program-icon"/>
+                    <div className="detailed-flat-info-program-icon-container">
+                        <AiOutlinePercentage className="detailed-flat-info-program-icon"/>
+                    </div>
+                    <div className="detailed-flat-info-program-description">
+                        Ставка
+                    </div>
+                    <div className="detailed-flat-info-program-value">
+                        {`${"7,70"}`}%
+                    </div>
                 </div>
                 <div className="detailed-flat-info-program-item detailed-flat-info-program-downment">
-                    <BsCalendar3 className="detailed-flat-info-program-icon"/>
+                    <div className="detailed-flat-info-program-icon-container">
+                        <BsCalendar3 className="detailed-flat-info-program-icon"/>
+                    </div>
+                    <div className="detailed-flat-info-program-description">
+                        Ежемесячный платёж
+                    </div>
+                    <div className="detailed-flat-info-program-value">
+                        {`${27921} ₽`}
+                    </div>
                 </div>
             </div>
             <div className="detailed-flat-info-link-container">
@@ -104,8 +134,8 @@ const FlatList:React.FC = ():JSX.Element => {
                 <a className="detailed-flat-info-link" target="_blank" href={`https://www.pik.ru/`}>pik.ru</a>
             </div>
             <div className="detailed-flat-controls">
-                <Button>Хочу тут жить</Button>
-                <Button>Следующая квартира</Button>
+                <Button className="detailed-flat-controls-select">Хочу тут жить</Button>
+                <Button className="detailed-flat-controls-next">Следующая квартира</Button>
             </div>        
         </div>
     ) : null;
